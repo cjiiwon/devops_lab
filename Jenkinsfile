@@ -66,14 +66,12 @@ pipeline {
             mail to: 'may2991004@gmail.com', // 이메일 주소
                  subject: "SUCCESS: Build ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                  body: "빌드가 성공했습니다! 결과 확인: ${env.BUILD_URL}"
+            echo "Build and test succeeded!"
         }
 
         failure {
             echo "Build or test failed!"
         }
 
-        success {
-            echo "Build and test succeeded!"
-        }
     }
 }
