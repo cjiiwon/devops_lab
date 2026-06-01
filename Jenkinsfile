@@ -62,13 +62,13 @@ pipeline {
             junit "${REPORT_DIR}/**/*.xml"
             archiveArtifacts artifacts: "${REPORT_DIR}/**/*", allowEmptyArchive: true
         }
+        success {
+            mail to: 'may2991004@gmail.com', // 이메일 주소
+                 subject: "SUCCESS: Build ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "빌드가 성공했습니다! 결과 확인: ${env.BUILD_URL}"
+        }
 
         failure {
-            failure {
-                mail to: 'may2991004@gmail.com',
-                    subject: "빌드 실패: ${env.JOB_NAME} (${env.BUILD_NUMBER})",
-                    body: "빌드에 실패했습니다. 콘솔 출력을 확인하세요: ${env.BUILD_URL}"
-    }
             echo "Build or test failed!"
         }
 
